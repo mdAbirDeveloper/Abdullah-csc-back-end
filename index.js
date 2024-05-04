@@ -5,8 +5,15 @@ const { MongoClient, ObjectId } = require("mongodb");
 const app = express();
 const PORT = 5000;
 
+const corsConfig = {
+    origin: "*",
+    credential: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}
+
+app.options("", cors(corsConfig))
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsConfig));
 
 const uri =
   "mongodb+srv://abdullah:MJsodSF9rnyxjyE5@cluster0.rlhccww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -14,7 +21,7 @@ const client = new MongoClient(uri);
 
 async function run() {
   try {
-    await client.connect();
+    client.connect();
 
     const productCollection = client.db("csc").collection("products");
     const projectCollection = client.db("csc").collection("projects");
