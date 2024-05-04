@@ -195,7 +195,7 @@ async function run() {
 
 
     app.get("/", async (req, res) => {
-      res.send("Welcome to the products page");
+      res.send("server is running");
     });
   } finally {
     // No need to close the client here, it should remain open
